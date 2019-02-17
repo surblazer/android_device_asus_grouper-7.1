@@ -17,6 +17,7 @@
  */
 -->
 <resources>
+    <bool name="def_wifi_on">true</bool>
     <!-- 2 minutes for default screen timeout -->
     <integer name="def_screen_off_timeout">120000</integer>
     <!-- Set the automatic brightness mode on by default -->
