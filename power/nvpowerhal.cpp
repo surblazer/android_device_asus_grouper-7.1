@@ -221,8 +221,8 @@ void common_power_set_interactive(__attribute__ ((unused)) struct power_module *
     sysfs_write("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", gov);
     ALOGI("Setting scaling_governor to %s", gov);
 
-    sysfs_write("/sys/devices/system/cpu/cpuquiet/tegra_cpuquiet/no_lp", lp_state);
-    ALOGI("Setting low power cluster %s", lp_state);
+//    sysfs_write("/sys/devices/system/cpu/cpuquiet/tegra_cpuquiet/no_lp", lp_state);
+//    ALOGI("Setting low power cluster %s", lp_state);
 
     if (0 != pInfo) {
         ALOGI("pInfo available ... ");
@@ -252,10 +252,10 @@ void common_power_set_interactive(__attribute__ ((unused)) struct power_module *
             ALOGI("dealing with wake up -> boosting CPU for 5s");
             pInfo->mTimeoutPoker->requestPmQosTimed("/dev/cpu_freq_min",
                                                      pInfo->max_frequency,
-                                                     s2ns(5));
+                                                     s2ns(10));
             pInfo->mTimeoutPoker->requestPmQosTimed("/dev/min_online_cpus",
                                                      DEFAULT_MAX_ONLINE_CPUS,
-                                                     s2ns(5));
+                                                     s2ns(10));
        }
     }
 
@@ -277,10 +277,7 @@ void common_power_hint(__attribute__ ((unused)) struct power_module *module,
         ALOGI("dealing with POWER_HINT_VSYNC -> boosting CPU for 100ms");
         if (data) {
             pInfo->mTimeoutPoker->requestPmQosTimed("/dev/cpu_freq_min",
-                                                     pInfo->max_frequency,
-                                                     ms2ns(100));
-            pInfo->mTimeoutPoker->requestPmQosTimed("/dev/min_online_cpus",
-                                                     DEFAULT_MAX_ONLINE_CPUS,
+                                                     pInfo->lp_max_frequency,
                                                      ms2ns(100));
         }
         break;
