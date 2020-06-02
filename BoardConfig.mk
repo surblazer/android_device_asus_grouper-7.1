@@ -31,8 +31,6 @@
 USE_CAMERA_STUB := true
 USE_PROPRIETARY_AUDIO_EXTENSIONS := false
 
-TARGET_RELEASETOOLS_EXTENSIONS := device/asus/grouper
-
 -include vendor/asus/grouper/BoardConfigVendor.mk
 include device/asus/grouper/BoardConfigCommon.mk
 
